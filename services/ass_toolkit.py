@@ -591,12 +591,123 @@ def handle_word_by_word(transcription_result, style_options, replace_dict, video
     logger.info(f"Handled {len(events)} dialogues in word-by-word style.")
     return "\n".join(events)
 
+def handle_neon(transcription_result, style_options, replace_dict, video_resolution):
+    """Neon style: bright colors with a glow effect."""
+    neon_defaults = {
+        'line_color': '#39FF14',
+        'outline_color': '#FF00FF',
+        'shadow_offset': 2
+    }
+    merged = {**neon_defaults, **style_options}
+    return handle_classic(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_glitch(transcription_result, style_options, replace_dict, video_resolution):
+    """Glitch style: rapid highlights with flashy colors."""
+    glitch_defaults = {
+        'line_color': '#FFFFFF',
+        'word_color': '#FF00FF'
+    }
+    merged = {**glitch_defaults, **style_options}
+    return handle_highlight(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_retro(transcription_result, style_options, replace_dict, video_resolution):
+    """Retro style using old-school fonts."""
+    retro_defaults = {
+        'font_family': 'Courier New',
+        'line_color': '#FFD700'
+    }
+    merged = {**retro_defaults, **style_options}
+    return handle_classic(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_minimalist(transcription_result, style_options, replace_dict, video_resolution):
+    """Minimalist style with small clean text."""
+    minimalist_defaults = {
+        'font_size': int(video_resolution[1] * 0.03),
+        'outline_width': 1,
+        'line_color': '#FFFFFF'
+    }
+    merged = {**minimalist_defaults, **style_options}
+    return handle_classic(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_comic(transcription_result, style_options, replace_dict, video_resolution):
+    """Comic style using playful fonts."""
+    comic_defaults = {
+        'font_family': 'Comic Sans MS',
+        'word_color': '#FF6600'
+    }
+    merged = {**comic_defaults, **style_options}
+    return handle_karaoke(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_bubble(transcription_result, style_options, replace_dict, video_resolution):
+    """Bubble style with boxed captions."""
+    bubble_defaults = {
+        'border_style': 3,
+        'box_color': '#FFFFFF',
+        'line_color': '#000000'
+    }
+    merged = {**bubble_defaults, **style_options}
+    return handle_classic(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_cyberpunk(transcription_result, style_options, replace_dict, video_resolution):
+    """Cyberpunk style with futuristic colors."""
+    cyberpunk_defaults = {
+        'line_color': '#00FFFF',
+        'outline_color': '#FF00FF',
+        'font_family': 'Orbitron'
+    }
+    merged = {**cyberpunk_defaults, **style_options}
+    return handle_highlight(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_holographic(transcription_result, style_options, replace_dict, video_resolution):
+    """Holographic style with shimmering colors."""
+    holo_defaults = {
+        'line_color': '#E0FFFF',
+        'outline_color': '#8A2BE2',
+        'shadow_offset': 2
+    }
+    merged = {**holo_defaults, **style_options}
+    return handle_classic(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_vintage(transcription_result, style_options, replace_dict, video_resolution):
+    """Vintage style with sepia tones."""
+    vintage_defaults = {
+        'line_color': '#D2B48C',
+        'font_family': 'Times New Roman'
+    }
+    merged = {**vintage_defaults, **style_options}
+    return handle_classic(transcription_result, merged, replace_dict, video_resolution)
+
+def handle_emoji(transcription_result, style_options, replace_dict, video_resolution):
+    """Emoji style: adds an emoji after each word."""
+    emoji_char = style_options.get('emoji', '✨')
+    modified = {'segments': []}
+    for seg in transcription_result['segments']:
+        new_seg = dict(seg)
+        new_words = []
+        for w in seg.get('words', []):
+            new_word = dict(w)
+            new_word['word'] = f"{w.get('word', '')}{emoji_char}"
+            new_words.append(new_word)
+        new_seg['words'] = new_words
+        modified['segments'].append(new_seg)
+    return handle_word_by_word(modified, style_options, replace_dict, video_resolution)
+
 STYLE_HANDLERS = {
     'classic': handle_classic,
     'karaoke': handle_karaoke,
     'highlight': handle_highlight,
     'underline': handle_underline,
-    'word_by_word': handle_word_by_word
+    'word_by_word': handle_word_by_word,
+    'neon': handle_neon,
+    'glitch': handle_glitch,
+    'retro': handle_retro,
+    'minimalist': handle_minimalist,
+    'comic': handle_comic,
+    'bubble': handle_bubble,
+    'cyberpunk': handle_cyberpunk,
+    'holographic': handle_holographic,
+    'vintage': handle_vintage,
+    'emoji': handle_emoji
 }
 
 def srt_to_ass(transcription_result, style_type, settings, replace_dict, video_resolution):
