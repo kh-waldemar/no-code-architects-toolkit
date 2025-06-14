@@ -72,7 +72,17 @@ The request body must be a JSON object with the following properties:
                 "karaoke",     // Highlights words sequentially in a karaoke style
                 "highlight",   // Shows full text but highlights the current word
                 "underline",   // Shows full text but underlines the current word
-                "word_by_word" // Shows one word at a time
+                "word_by_word", // Shows one word at a time
+                "neon",        // Vibrant neon colors with a glow effect
+                "glitch",      // Flashy colors with rapid highlights
+                "retro",       // Retro fonts reminiscent of the 80s
+                "minimalist",  // Small, clean text with subtle outline
+                "comic",       // Comic-style fonts with playful colors
+                "bubble",      // Speech-bubble style boxes
+                "cyberpunk",   // Futuristic cyan/magenta palette
+                "holographic", // Light shimmer reminiscent of holograms
+                "vintage",     // Sepia-toned vintage look
+                "emoji"        // Adds emoji icons after each word
             ]
         },
         "outline_width": {"type": "integer"},
@@ -323,6 +333,16 @@ Additionally, the main application context (`app.py`) includes error handling fo
     - `highlight`: Shows the full subtitle text but highlights each word as it's spoken
     - `underline`: Shows the full subtitle text but underlines each word as it's spoken
     - `word_by_word`: Shows only one word at a time
+    - `neon`: Vibrant neon colors with a glow effect
+    - `glitch`: Flashy colors with rapid highlights
+    - `retro`: Retro fonts reminiscent of the 80s
+    - `minimalist`: Small, clean text with subtle outline
+    - `comic`: Comic-style fonts with playful colors
+    - `bubble`: Speech-bubble style boxes
+    - `cyberpunk`: Futuristic cyan/magenta palette
+    - `holographic`: Light shimmer reminiscent of holograms
+    - `vintage`: Sepia-toned vintage look
+    - `emoji`: Adds emoji icons after each word
   - `position` can be used to place subtitles in one of nine positions on the screen
   - `alignment` determines text alignment within the position (left, center, right)
   - `font_family` can be any available system font

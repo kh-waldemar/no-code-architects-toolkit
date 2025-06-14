@@ -65,7 +65,23 @@ logger = logging.getLogger(__name__)
                 "strikeout": {"type": "boolean"},
                 "style": {
                     "type": "string",
-                    "enum": ["classic", "karaoke", "highlight", "underline", "word_by_word"]
+                    "enum": [
+                        "classic",
+                        "karaoke",
+                        "highlight",
+                        "underline",
+                        "word_by_word",
+                        "neon",
+                        "glitch",
+                        "retro",
+                        "minimalist",
+                        "comic",
+                        "bubble",
+                        "cyberpunk",
+                        "holographic",
+                        "vintage",
+                        "emoji"
+                    ]
                 },
                 "outline_width": {"type": "integer"},
                 "spacing": {"type": "integer"},
